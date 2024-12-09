@@ -24,5 +24,13 @@ namespace CodeTest.DPTest
 
 			Assert.Equal( 0, LeetcodeMinPathSum.MinPathSum( [[0]] ) );
 		}
+
+
+		[Fact]
+		public void Test_DP_ZeroOneBag()
+		{
+			Assert.Equal( 55, DPBag.ZeroOneBag( [2, 3, 5], [15, 30, 40], 7 ) );
+			Assert.Equal( 55, DPBag.ZeroOneBag2( [2, 3, 5], [15, 30, 40], 7 ) );
+		}
 	}
 }
