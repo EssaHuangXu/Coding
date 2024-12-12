@@ -31,6 +31,13 @@ namespace CodeTest.DPTest
 		{
 			Assert.Equal( 55, DPBag.ZeroOneBag( [2, 3, 5], [15, 30, 40], 7 ) );
 			Assert.Equal( 55, DPBag.ZeroOneBag2( [2, 3, 5], [15, 30, 40], 7 ) );
+			Assert.Equal( 3, DPBag.NumSquares( 12 ) );
+		}
+
+		[Fact]
+		public void Test_DP_Rob1()
+		{
+			Assert.Equal( 4, DPRob.Rob( [1, 2, 3, 1] ) );
 		}
 	}
 }

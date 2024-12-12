@@ -66,5 +66,28 @@
 
 			return dp[^1];
 		}
+
+		public static int NumSquares( int n )
+		{
+			var dp = new int[n + 1];
+			for ( int i = 1; i <= n; i++ )
+			{
+				dp[i] = i;
+			}
+
+			var j = 2;
+			var sqr = j * j;
+			while( sqr <= n )
+			{
+				for( int i = n; i >= 1; i-- )
+				{
+					var k = i / sqr;
+					dp[i] = Math.Min( dp[i], k + dp[i - k * sqr] );
+				}
+				j++;
+				sqr = j * j;
+			}
+			return dp[^1];
+		}
 	}
 }
