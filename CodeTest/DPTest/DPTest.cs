@@ -48,5 +48,11 @@ namespace CodeTest.DPTest
 			Assert.Equal( 0, DPBag.CoinChange( [1], 0 ) );
 			Assert.Equal( 20, DPBag.CoinChange( [186, 419, 83, 408], 6249 ) );
 		}
+
+		[Fact]
+		public void Test_DP_WordBreak()
+		{
+			Assert.True( DPBag.WordBreak( "Word", new List<string> { "Wo", "rd" } ) );
+		}
 	}
 }

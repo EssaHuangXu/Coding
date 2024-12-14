@@ -116,5 +116,28 @@
 
 			return dp[^1] > amount ? -1 : dp[^1];
 		}
+
+		public static bool WordBreak( string s, IList<string> wordDict )
+		{
+			if( s == null ) return false;
+			if( wordDict.Count == 0 ) return false;
+
+			var dp = new bool[s.Length + 1];
+			dp[0] = true;
+			for( int i = 0; i < s.Length + 1; i++ )
+			{
+				for ( int j = 0; j < wordDict.Count; j++ )
+				{
+					var word = wordDict[j];
+					if ( i < word.Length )
+					{
+						continue;
+					}
+					dp[i] = dp[i] || ( dp[i - word.Length] && string.Equals( s[( i - word.Length )..i], word ) );
+				}
+			}
+
+			return dp[^1];
+		}
 	}
 }
