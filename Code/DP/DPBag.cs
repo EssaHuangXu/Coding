@@ -89,5 +89,32 @@
 			}
 			return dp[^1];
 		}
+
+		public static int CoinChange( int[] coins, int amount )
+		{
+			int max = amount + 1;
+			if( coins.Length == 0 ) return -1;
+			if( amount == 0 ) return 0;
+			var dp = new int[amount + 1];
+			dp[0] = 0;
+
+			for (int i = 1; i <= amount; i++ )
+			{
+				dp[i] = max;
+			}
+
+			for( int i = 1; i <= amount; i++ )
+			{
+				for( var j = 0; j < coins.Length; j++ )
+				{
+					if ( coins[j] <= i )
+					{
+						dp[i] = Math.Min( dp[i - coins[j]] + 1, dp[i] );
+					}
+				}
+			}
+
+			return dp[^1] > amount ? -1 : dp[^1];
+		}
 	}
 }

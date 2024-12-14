@@ -39,5 +39,14 @@ namespace CodeTest.DPTest
 		{
 			Assert.Equal( 4, DPRob.Rob( [1, 2, 3, 1] ) );
 		}
+
+		[Fact]
+		public void Test_DP_CoinChange()
+		{
+			Assert.Equal( 3, DPBag.CoinChange( [1, 2, 5], 11 ) );
+			Assert.Equal( -1, DPBag.CoinChange( [2], 3 ) );
+			Assert.Equal( 0, DPBag.CoinChange( [1], 0 ) );
+			Assert.Equal( 20, DPBag.CoinChange( [186, 419, 83, 408], 6249 ) );
+		}
 	}
 }
