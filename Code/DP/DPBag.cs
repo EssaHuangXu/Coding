@@ -139,5 +139,55 @@
 
 			return dp[^1];
 		}
+
+		//TODO: 还有一种贪心解法
+		public static int LengthOfLIS( int[] nums )
+		{
+			if( nums.Length == 0 ) return 0;
+			if( nums.Length == 1 ) return 1;
+
+			var dp = new int[nums.Length + 1];
+			dp[0] = 0;
+			var result = 0;
+
+			for( int i = 1; i <= nums.Length; i++ )
+			{
+				dp[i] = 1;
+				for( int j = 1; j < i; j ++)
+				{
+					if ( nums[i - 1] > nums[j - 1] )
+					{
+						dp[i] = Math.Max( dp[i], dp[j] + 1 );
+					}
+				}
+				result = Math.Max( result, dp[i] );
+			}
+
+			return result;
+		}
+
+		public static int MaxProduct( int[] nums )
+		{
+			if( nums.Length == 0 ) return 0;
+
+			var dp = new int[nums.Length + 1];
+			dp[0] = 0;
+			int max = int.MinValue;
+			for( int i = 1; i <= nums.Length; i++ )
+			{
+				var last = dp[i - 1];
+				if( last == 0 )
+				{
+					dp[i] = nums[i - 1];
+				}
+				else
+				{
+					var predect = dp[i - 1] * nums[i - 1];
+					dp[i] = predect > last ? predect : 0;
+				}
+				max = Math.Max( max, dp[i] );
+			}
+			return max;
+		}
 	}
 }

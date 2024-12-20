@@ -54,5 +54,18 @@ namespace CodeTest.DPTest
 		{
 			Assert.True( DPBag.WordBreak( "Word", new List<string> { "Wo", "rd" } ) );
 		}
+
+		[Fact]
+		public void Test_DP_LengthOfLIS()
+		{
+			Assert.Equal( 4, DPBag.LengthOfLIS( [10, 9, 2, 5, 3, 7, 101, 18] ) );
+			Assert.Equal( 4, DPBag.LengthOfLIS( [0, 1, 0, 3, 2, 3] ) );
+		}
+
+		[Fact]
+		public void Test_Dp_MaxProduct()
+		{
+			Assert.Equal( 6, DPBag.MaxProduct( [2, 3, -2, 4] ) );
+		}
 	}
 }
