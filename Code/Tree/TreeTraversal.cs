@@ -123,5 +123,80 @@ namespace Code.Tree
 
 			return result;
 		}
+
+		public static TreeNode SortedArrayToBST( int[] nums )
+		{
+			static TreeNode SortedArrayToBSTInternal( int[] nums, int start, int end )
+			{
+				if( start > end ) return null;
+				var mid = (start + end) / 2;
+				var node = new TreeNode( nums[mid] )
+				{
+					left = SortedArrayToBSTInternal( nums, start, mid - 1 ),
+					right = SortedArrayToBSTInternal( nums, mid + 1, end )
+				};
+				return node;
+			}
+
+			if( nums.Length == 0 ) return null;
+			return SortedArrayToBSTInternal( nums, 0, nums.Length - 1 );
+		}
+
+		public static bool IsValidBST( TreeNode root )
+		{
+			static bool IsValidBSTInternal( TreeNode root, long max, long min )
+			{
+				if( root == null ) return true;
+
+				return root.val > min && root.val < max && IsValidBSTInternal( root.left, root.val, min ) && IsValidBSTInternal( root.right, max, root.val );
+			}
+
+			return IsValidBSTInternal(root, long.MaxValue, long.MinValue);
+		}
+
+		public static int KthSmallest( TreeNode root, int k )
+		{
+			static void CountChilds( TreeNode root, Dictionary<TreeNode, int> cache)
+			{
+				if (root == null)
+				{
+					return;
+				}
+
+				CountChilds( root.left, cache );
+				CountChilds( root.right, cache );
+				int letCount = root.left == null ? 0 : cache.GetValueOrDefault( root.left );
+				int rightCount = root.right == null ? 0 : cache.GetValueOrDefault( root.right );
+				cache[root] = letCount + rightCount + 1;
+			}
+			
+			var cache = new Dictionary<TreeNode, int>();
+			CountChilds(root, cache);
+
+			if( cache[root] < k )
+			{
+				return -1;
+			}
+
+			while( root != null )
+			{
+				var leftCount = root.left == null ? 0 : cache.GetValueOrDefault( root.left );
+				if( leftCount + 1 == k )
+				{
+					return root.val;
+				}
+				if( leftCount >= k )
+				{
+					root = root.left;
+				}
+				else
+				{
+					k -= leftCount + 1;
+					root = root.right;
+				}
+			}
+
+			return -1;
+		}
 	}
 }
