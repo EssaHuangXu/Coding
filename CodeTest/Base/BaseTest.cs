@@ -23,5 +23,13 @@ namespace CodeTest.Base
 		{
             Assert.Equal( 2, RemoveElement.RemoveDuplicates( [1, 1, 2] ) );
 		}
+
+        [Fact]
+        public void Test_MaxSlidingWindow()
+        {
+            Assert.Equal( [3, 3, 5, 5, 6, 7], SlideWindow.MaxSlidingWindow( [1, 3, -1, -3, 5, 3, 6, 7], 3 ) );
+			Assert.Equal( [1, -1], SlideWindow.MaxSlidingWindow( [1, -1], 1 ) );
+
+		}
 	}
 }
