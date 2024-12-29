@@ -29,7 +29,14 @@ namespace CodeTest.Base
         {
             Assert.Equal( [3, 3, 5, 5, 6, 7], SlideWindow.MaxSlidingWindow( [1, 3, -1, -3, 5, 3, 6, 7], 3 ) );
 			Assert.Equal( [1, -1], SlideWindow.MaxSlidingWindow( [1, -1], 1 ) );
-
 		}
+
+        [Fact]
+        public void Test_SortColors()
+        {
+            Assert.Equal( [0, 0, 1, 1, 1, 2], Sort.SortColors( [2, 1, 0, 1, 0, 1] ) );
+			Assert.Equal( [0, 1, 2], Sort.SortColors( [1, 2, 0] ) );
+            Assert.Equal( [0, 0, 1, 1, 2, 2], Sort.SortColors( [2, 0, 2, 1, 1, 0] ) );
+        }
 	}
 }
