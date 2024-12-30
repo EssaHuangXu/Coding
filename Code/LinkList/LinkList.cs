@@ -62,5 +62,44 @@
 			}
 			return true;
 		}
+	
+		public static ListNode DetectCircle( ListNode head )
+		{
+			var slow = head;
+			var fast = head;
+			while (fast != null )
+			{
+				if ( fast.next != null )
+				{
+					fast = fast.next;
+				}
+				else
+				{
+					return null;
+				}
+
+				if( fast.next != null )
+				{
+					fast = fast.next;
+				}
+				else
+				{
+					return null;
+				}
+
+				slow = slow.next;
+				if( slow == fast)
+				{
+					var node = head;
+					while ( node != slow )
+					{
+						node = node.next;
+						slow = slow.next;
+					}
+					return slow;
+				}
+			}
+			return null;
+		}
 	}
 }
