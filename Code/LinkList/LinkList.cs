@@ -133,5 +133,48 @@
 				return pre.next;
 			}
 		}
+
+		public static ListNode ReverseKGroup( ListNode head, int k )
+		{
+			static ListNode Reverse( ListNode pre, Stack<ListNode> reverse )
+			{
+				var tail = reverse.Peek().next;
+				var head = pre;
+				while( reverse.Count > 0 )
+				{
+					var node = reverse.Pop();
+					head.next = node;
+					head = node;
+				}
+
+				head.next = tail;
+				return head;
+			}
+
+			var pre = new ListNode( -1 );
+			pre.next = head;
+			var interPre = pre;
+			Stack<ListNode> reverse = new Stack<ListNode>();
+			while( head != null )
+			{
+				if ( reverse.Count >= k )
+				{
+					//reverse
+					interPre = Reverse( interPre, reverse );
+				}
+				else
+				{
+					reverse.Push( head );
+					head = head.next;
+				}
+			}
+
+			if( reverse.Count >= k )
+			{
+				Reverse( interPre, reverse );
+			}
+
+			return pre.next;
+		}
 	}
 }
