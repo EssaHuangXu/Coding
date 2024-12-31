@@ -101,5 +101,37 @@
 			}
 			return null;
 		}
+
+		public static ListNode RemoveNthFromEnd( ListNode head, int n )
+		{
+			var pre = new ListNode( -1 );
+			pre.next = head;
+
+			var fast = pre;
+			var slow = pre;
+			var interval = 0;
+			while( fast.next != null )
+			{
+				fast = fast.next;
+				if ( interval >= n )
+				{
+					slow = slow.next;
+				}
+				else
+				{
+					interval++;
+				}
+			}
+
+			if ( interval < n )
+			{
+				return pre.next;
+			}
+			else
+			{
+				slow.next = slow.next.next;
+				return pre.next;
+			}
+		}
 	}
 }
