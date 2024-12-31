@@ -176,5 +176,27 @@
 
 			return pre.next;
 		}
+
+		public static ListNode SwapPairs( ListNode head )
+		{
+			var pre = new ListNode( -1 )
+			{
+				next = head
+			};
+
+			var swapPre = pre;
+			while( head != null && head.next != null )
+			{
+				var next = head.next;
+				head.next = next.next;
+				swapPre.next = next;
+				next.next = head;
+
+				swapPre = head;
+				head = head.next;
+			}
+
+			return pre.next;
+		}
 	}
 }
