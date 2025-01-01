@@ -67,5 +67,11 @@ namespace CodeTest.DPTest
 		{
 			Assert.Equal( 6, DPBag.MaxProduct( [2, 3, -2, 4] ) );
 		}
+
+		[Fact]
+		public void Test_Dp_MaxSubArray()
+		{
+			Assert.Equal( 5, DPBag.MaxSubArray( [-2, 1, -3, 4, -1, 2, 1, -5, 4] ) );
+		}
 	}
 }
