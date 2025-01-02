@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Code.LinkList.LinkList;
 
 namespace Code.Tree
 {
@@ -197,6 +198,51 @@ namespace Code.Tree
 			}
 
 			return -1;
+		}
+
+		public static int DiameterOfBinaryTree( TreeNode root )
+		{
+			static int DepthInternal( TreeNode root, int rootDepth )
+			{
+				if( root == null ) return rootDepth;
+				var leftDepth = root.left != null ? DepthInternal( root.left, rootDepth ) : 0;
+				var rightDepth = root.right != null ? DepthInternal( root.right, rootDepth ) : 0;
+				return Math.Max( leftDepth, rightDepth ) + 1;
+			}
+
+			var leftDepth = DepthInternal( root.left, 0 );
+			var rightDepth = DepthInternal( root.right, 0 );
+			if ( leftDepth == 0 ) { return rightDepth; }
+			if ( rightDepth == 0 ) { return leftDepth; }
+			return leftDepth + rightDepth;
+		}
+
+		public static ListNode[] ListOfDepth( TreeNode tree )
+		{
+			var queue = new Queue<TreeNode>();
+			var nextQueue = new Queue<TreeNode>();
+			
+			queue.Enqueue( tree );
+			var list = new List<ListNode>();
+			while( queue.Count > 0 )
+			{
+				var node = new ListNode( -1 );
+				var head = node;
+				foreach( var child in queue )
+				{
+					if( child.left != null ) nextQueue.Enqueue( child.left );
+					if( child.right != null ) nextQueue.Enqueue( child.right );
+					var curNode = new ListNode( child.val );
+					node.next = curNode;
+					node = node.next;
+				}
+				list.Add( head.next );
+				queue.Clear();
+				var temp = queue;
+				queue = nextQueue;
+				nextQueue = temp;
+			}
+			return [.. list];
 		}
 	}
 }
